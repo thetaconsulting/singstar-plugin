@@ -58,8 +58,10 @@ $getOrder = new GetOrder();
     <?php
 
 $songTable = $getSongs->songs;
+
 $column = $getOrder->orderColumn;
 $direction = $getOrder->direction;
+
 
 array_multisort( array_column( $songTable, $column ), $direction, SORT_STRING, $songTable );
       foreach($songTable as $song) { ?>

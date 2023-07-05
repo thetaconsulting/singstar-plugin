@@ -195,7 +195,7 @@ class Populate  {
     (262,	'SingStar SuomiHitit',	'Ultra Bra',	'Tyttöjen välisestä ystävyydestä'),
     (263,	'SingStar SuomiHitit',	'Yö',	'Särkyvää');";
 
-    $this->pets = $wpdb->query($wpdb->prepare($query));
+    $this->songs = $wpdb->query($query);
   }
 
 }

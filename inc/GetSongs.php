@@ -22,7 +22,8 @@ class GetSongs {
    			$query .= $this->createWhereText();
 				$this->songs = $wpdb->get_results($wpdb->prepare($query, $this->placeholders));
 	  } else {
-		  $this->songs = $wpdb->get_results($wpdb->prepare($query));
+		 // $this->songs = $wpdb->get_results($wpdb->prepare($query));
+     $this->songs = $wpdb->get_results($query);
 	  }
 
   }
