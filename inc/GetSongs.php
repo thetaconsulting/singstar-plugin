@@ -13,14 +13,23 @@ class GetSongs {
     $query = "SELECT * FROM $tablename ";
     $countQuery = "SELECT COUNT(*) FROM $tablename ";
 
-    $countQuery .= $this->createWhereText();
+   
+    if ( $this->placeholders == NULL) {
+      $this->count = $wpdb->get_var($countQuery);             // No arguments -> plaeholders-array is empty -> cannot use prepare
+    } else { 
+      $countQuery .= $this->createWhereText();
+      $this->count = $wpdb->get_var($wpdb->prepare($countQuery, $this->placeholders));
+    } 
 
-    $this->count = $wpdb->get_var($wpdb->prepare($countQuery, $this->placeholders));
 	  if ($this->count != 0 ) 
 	  { 
 			/* wp_safe_redirect(site_url()); */
+      if ( $this->placeholders == NULL) {                     // No arguments -> plaeholders-array is empty -> cannot use prepare
+        $this->songs = $wpdb->get_results($query);
+      } else {
    			$query .= $this->createWhereText();
 				$this->songs = $wpdb->get_results($wpdb->prepare($query, $this->placeholders));
+      }
 	  } else {
      $this->songs = $wpdb->get_results($query);
 	  }
